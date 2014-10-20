@@ -6,19 +6,12 @@ local custom = {
   file = './docSet.dsidx'
 }
 
-local f = loadfile("./dash.ld")
+setmetatable(custom, { __index = _G })
+
+local f = loadfile("./dash.ld", nil, custom)
 
 if f then
-  setmetatable(custom, { __index = _G })
-  setfenv(f, custom)
-
-  local ok, err = pcall(function()
-    f()
-  end)
-
-  if not ok then
-    print("Failed to load custom type stuff.")
-  end
+  f()
 end
 
 return {
