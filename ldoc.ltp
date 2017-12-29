@@ -120,7 +120,7 @@
 #   for parm in iter(item.params) do
 #     local param,sublist = item:subparam(parm)
 #     if sublist then
-        <li><span class="parameter">$(sublist)</span>$(M(item.params[sublist],item))
+        <li><span class="parameter">$(sublist)</span>$(M(item.params.map[sublist],item))
         <ul>
 #     end
 #     for p in iter(param) do
@@ -129,9 +129,11 @@
 #       if tp ~= '' then
             <span class="types">$(tp)</span>
 #       end
-        $(M(item.params[p],item))
-#       if def then
-         (<em>default</em> $(def))
+        $(M(item.params.map[p],item))
+#       if def == true then
+         (<em>optional</em>)
+#       elseif def then
+         (<em>default:</em> $(def))
 #       end
 #       if item:readonly(p) then
           <em>readonly</em>
